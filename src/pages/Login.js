@@ -27,6 +27,12 @@ const Login = ({setUsuario}) => {
     const response = await createUser({name, email, password});
     console.log(response)
     setIsRegistrando(false);
+    swal({
+      title: "Genial",
+      text: "nuevo usuario regitrado",
+      icon: "success",
+    });
+    getList();
     }
     catch(e) {
       console.log(e, 'error')
@@ -128,6 +134,7 @@ const Login = ({setUsuario}) => {
                 <TextField
                   label="Correo"
                   variant="outlined"
+                  value={email}
                   type="email"
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -139,6 +146,7 @@ const Login = ({setUsuario}) => {
                   label="Contraseña"
                   variant="outlined"
                   type="password"
+                  value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
