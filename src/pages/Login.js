@@ -1,44 +1,69 @@
-import React, { useState } from "react";
-import { app } from "../config/fb";
+import React, { useEffect ,useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import swal from "sweetalert";
+import getUsersAll from "../users/hooks/getUsersAll";
 
-const Login = (props) => {
+const Login = ({setUsuario}) => {
   const [isRegistrando, setIsRegistrando] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [users, setUsers]= useState([]);
 
-  const createUserFirebase = () => {
-    app
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((usuarioFirebase) => {
-        props.setUsuario(usuarioFirebase);
-      })
-      .catch((e) => console.log(e));
+  const getList = async () => {
+    const usersList = await getUsersAll();
+    setUsers(usersList)
   };
 
-  const loginUserFirebase = () => {
-    app
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((usuarioFirebase) => {
-        props.setUsuario(usuarioFirebase);
-      })
-      .catch((e) => {
-        swal({
-          title: "Oops",
-          text: "usuario o contraseña equivocado",
-          icon: "error",
-        });
+  useEffect(()=>{
+    getList();
+  }, []);
+
+  const createUser = () => {
+    try {
+      // aqui post de usuarios
+    }
+    catch(e) {
+      console.log(e, 'error')
+      swal({
+        title: "Oops",
+        text: "fallo al  registrarse intenta de nuevo",
+        icon: "error",
       });
+    }
+  };
+
+  const loginUser = () => {
+    try {
+      // aqui el get de usuarios
+     const userLogged = users.find(userlisted=> (userlisted.email === email) && (userlisted.password === password));
+     if(userLogged){
+      setTimeout(()=>{
+        setUsuario(userLogged)
+      }, 1000);
+     }
+     else {
+      swal({
+        title: "Oops",
+        text: "usuario o contraseña equivocado",
+        icon: "error",
+      });
+     }
+    }
+    catch(e) {
+      console.log(e, 'error')
+      swal({
+        title: "Oops",
+        text: "usuario o contraseña equivocado",
+        icon: "error",
+      });
+    }
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      loginUserFirebase();
+      loginUser();
     }
   };
 
@@ -74,7 +99,7 @@ const Login = (props) => {
                   }}
                 />
               </Box>
-              <Button variant="contained" onClick={() => createUserFirebase()}>
+              <Button variant="contained" onClick={() => createUser()}>
                 Registrarme
               </Button>
               <Button onClick={() => setIsRegistrando(false)}>
@@ -107,7 +132,7 @@ const Login = (props) => {
                   onKeyDown={handleKeyDown}
                 />
               </Box>
-              <Button variant="contained" onClick={() => loginUserFirebase()}>
+              <Button variant="contained" onClick={() => loginUser()}>
                 Iniciar sesión
               </Button>
               <Button onClick={() => setIsRegistrando(true)}>
