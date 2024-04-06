@@ -1,0 +1,15 @@
+.img-icon {
+    width: 50px;
+    max-width: 100%;
+    height: auto;
+}
+
+.container-display {
+    display: flex;
+    vertical-align: bottom;
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+
+}
