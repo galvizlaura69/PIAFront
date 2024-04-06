@@ -2,20 +2,12 @@ import axios from 'axios';
 import { API, HEADERS } from '../../config/dummyapi';
 
 
-  const createUser = async (firstName, lastName, email, title) => {
+  const createUser = async (payload) => {
     try{
-      const payLoad = {
-        firstName,
-        lastName,
-        email,
-        title
-      };
-
-      
-    const { data } = await axios.post(`${API}/user/create`, payLoad, {
-      headers: HEADERS,
-    });
+    console.log(payload, 'payload');
+    const { data } = await axios.post(`${API}/users`, payload);
     const users = data.data;
+    console.log('response', data.data)
     return users;
     }catch(error){
       return error.message;

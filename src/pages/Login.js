@@ -4,9 +4,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import swal from "sweetalert";
 import getUsersAll from "../users/hooks/getUsersAll";
+import createUser from "../users/hooks/createUser";
 
 const Login = ({setUsuario}) => {
   const [isRegistrando, setIsRegistrando] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [users, setUsers]= useState([]);
@@ -20,9 +22,11 @@ const Login = ({setUsuario}) => {
     getList();
   }, []);
 
-  const createUser = () => {
+  const createNewUser = async() => {
     try {
-      // aqui post de usuarios
+    const response = await createUser({name, email, password});
+    console.log(response)
+    setIsRegistrando(false);
     }
     catch(e) {
       console.log(e, 'error')
@@ -36,7 +40,6 @@ const Login = ({setUsuario}) => {
 
   const loginUser = () => {
     try {
-      // aqui el get de usuarios
      const userLogged = users.find(userlisted=> (userlisted.email === email) && (userlisted.password === password));
      if(userLogged){
       setTimeout(()=>{
@@ -81,6 +84,16 @@ const Login = ({setUsuario}) => {
             <form>
               <Box mb={2}>
                 <TextField
+                  label="Nombre"
+                  variant="outlined"
+                  type="name"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+              </Box>
+              <Box mb={2}>
+                <TextField
                   label="Correo"
                   variant="outlined"
                   type="email"
@@ -99,7 +112,7 @@ const Login = ({setUsuario}) => {
                   }}
                 />
               </Box>
-              <Button variant="contained" onClick={() => createUser()}>
+              <Button variant="contained" onClick={() => createNewUser()}>
                 Registrarme
               </Button>
               <Button onClick={() => setIsRegistrando(false)}>
