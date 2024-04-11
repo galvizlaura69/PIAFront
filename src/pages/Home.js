@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from "react";
 import { Grid, Typography, Paper } from '@mui/material';
+import getDataSensorAll from '../users/hooks/getDataSensorAll';
 
 const noticias = [
   {
@@ -24,47 +25,83 @@ const noticias = [
   },
 ];
 
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSensorList: [],
+    };
+  }
 
-const Home = ({user}) => {
-  const styles = {
-    root: {
-      flexGrow: 1,
-      padding: '16px',
-    },
-    paper: {
-      padding: '16px',
-      textAlign: 'center',
-      color: '#333',
-    },
-    image: {
-      maxWidth: '100%',
-      maxHeight: '100%',
-    },
+  async componentDidMount() {
+    this.getList();
+  }
+
+  getList = async () => {
+    try {
+      const dataSensorList = await getDataSensorAll();
+      this.setState({ dataSensorList });
+    } catch (error) {
+      console.error("Error fetching sensor data:", error);
+    }
   };
 
-  return (
-    <div style={styles.root}>
-      <Typography variant="h4" gutterBottom>
-        Últimas noticias para ti {user.name}
-      </Typography>
-      <Grid container spacing={3}>
-        {noticias.map((categoria, index) => (
-          <Grid key={index} item xs={12} sm={6} md={3}>
-            <Paper style={styles.paper}>
-              <Typography variant="h6" gutterBottom>
-                {categoria.titulo}
-              </Typography>
-              <img src={categoria.imagen} alt={categoria.titulo} style={styles.image} />
-              {/* Contenido de las noticias */}
-              <Typography>
-                {categoria.contenido}
-              </Typography>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
-  );
-};
+  render() {
+    const { user } = this.props;
+    const { dataSensorList } = this.state;
+
+    const styles = {
+      root: {
+        flexGrow: 1,
+        padding: '16px',
+      },
+      paper: {
+        padding: '16px',
+        textAlign: 'center',
+        color: '#333',
+      },
+      image: {
+        maxWidth: '100%',
+        maxHeight: '100%',
+      },
+    };
+
+    return (
+      <div style={styles.root}>
+        <Typography variant="h4" gutterBottom>
+          Últimas noticias para ti {user.name}
+        </Typography>
+        <Grid container spacing={3}>
+          {noticias.map((categoria, index) => (
+            <Grid key={index} item xs={12} sm={6} md={3}>
+              <Paper style={styles.paper}>
+                <Typography variant="h6" gutterBottom>
+                  {categoria.titulo}
+                </Typography>
+                <img src={categoria.imagen} alt={categoria.titulo} style={styles.image} />
+                {/* Contenido de las noticias */}
+                <Typography>
+                  {categoria.contenido}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+        {/* Mostrar datos del sensor */}
+        <div>
+          <Typography variant="h5" gutterBottom>
+            Datos del Sensor:
+          </Typography>
+          {dataSensorList.map((data, index) => (
+            <div key={index}>
+              <Typography variant="subtitle1">CO2: {data.CO2}</Typography>
+              <Typography variant="subtitle1">Fecha: {data.date}</Typography>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Home;
