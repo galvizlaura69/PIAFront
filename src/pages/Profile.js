@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
-import swal from "sweetalert";
 import updateUser from "../users/hooks/updateUser";
 import getUserId from "../users/hooks/getUserId";
-import { useHistory } from 'react-router-dom';
 import deleteUser from "../users/hooks/deleteUser";
+import swal from "sweetalert";
+
+
 
 const Profile = ({user, setUsuario}) => {
-  const history = useHistory();
+
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -26,7 +27,7 @@ const Profile = ({user, setUsuario}) => {
       localStorage.setItem('user', JSON.stringify(userUpdated));
         swal({
           title: "Genial",
-          text: "nuevo usuario regitrado",
+          text: "Datos actualizados",
           icon: "success",
         });
       }catch(e) {

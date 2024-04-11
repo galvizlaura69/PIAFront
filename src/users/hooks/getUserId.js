@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API, HEADERS } from '../../config/dummyapi';
+import { API, HEADERS } from '../../config/piaApi';
 const getUserId = async (id) => {
 
 

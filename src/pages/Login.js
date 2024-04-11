@@ -2,9 +2,9 @@ import React, { useEffect ,useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import swal from "sweetalert";
 import getUsersAll from "../users/hooks/getUsersAll";
 import createUser from "../users/hooks/createUser";
+import swal from "sweetalert";
 
 const Login = ({setUsuario}) => {
   const [isRegistrando, setIsRegistrando] = useState(false);
@@ -92,7 +92,6 @@ const Login = ({setUsuario}) => {
               <Box mb={2}>
                 <TextField
                   label="Nombre"
-                  variant="outlined"
                   type="name"
                   onChange={(e) => {
                     setName(e.target.value);
@@ -102,7 +101,6 @@ const Login = ({setUsuario}) => {
               <Box mb={2}>
                 <TextField
                   label="Correo"
-                  variant="outlined"
                   type="email"
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -111,8 +109,7 @@ const Login = ({setUsuario}) => {
               </Box>
               <Box mb={2}>
                 <TextField
-                  label="Contraseña"
-                  variant="outlined"
+                  label="Contraseña"   
                   type="password"
                   onChange={(e) => {
                     setPassword(e.target.value);
@@ -134,7 +131,6 @@ const Login = ({setUsuario}) => {
               <Box mb={2}>
                 <TextField
                   label="Correo"
-                  variant="outlined"
                   value={email}
                   type="email"
                   onChange={(e) => {
@@ -145,7 +141,6 @@ const Login = ({setUsuario}) => {
               <Box mb={2}>
                 <TextField
                   label="Contraseña"
-                  variant="outlined"
                   type="password"
                   value={password}
                   onChange={(e) => {

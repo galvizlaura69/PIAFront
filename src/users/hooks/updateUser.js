@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API } from '../../config/dummyapi';
+import { API } from '../../config/piaApi';
 
 const updateUser = async (user) => {
     try{
