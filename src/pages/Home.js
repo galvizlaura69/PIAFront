@@ -1,33 +1,17 @@
 import React, { Component } from "react";
 import { Typography } from '@mui/material';
-import getDataSensorAll from '../users/hooks/getDataSensorAll';
 import NoticesSidebar from "../users/components/NoticesSidebar";
 import SensorData from "../users/components/SensorData";
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dataSensorList: [],
-    };
   }
 
-  async componentDidMount() {
-    this.getList();
-  }
 
-  getList = async () => {
-    try {
-      const dataSensorList = await getDataSensorAll();
-      this.setState({ dataSensorList });
-    } catch (error) {
-      console.error("Error fetching sensor data:", error);
-    }
-  };
 
   render() {
     const { user } = this.props;
-    const { dataSensorList } = this.state;
 
     const noticias = [
       {

@@ -13,3 +13,10 @@
     flex-wrap: wrap;
 
 }
+
+body{
+    width: 98%;
+    position: relative;
+    margin: auto;
+  overflow-x: hidden;
+}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Typography, Paper, Grid } from '@mui/material';
-import { Margin } from '@mui/icons-material';
 
 class NoticesSidebar extends Component {
   constructor(props) {
