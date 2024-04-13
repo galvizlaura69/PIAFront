@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Typography } from '@mui/material';
+import { Typography } from '@mui/material'; 
+import getDataSensorAll from '../hooks/getDataSensorAll';
 
 class SensorData extends Component {
   constructor(props) {
@@ -8,27 +9,26 @@ class SensorData extends Component {
       dataSensorList: [],
     };
   }
-
   async componentDidMount() {
-    const dataSensorList = await this.fetchSensorData();
-    this.setState({ dataSensorList });
+    this.getList();
   }
 
-  fetchSensorData = async () => {
-    return [
-      { id: 1, CO2: 350, date: '2024-04-10T10:00:00' },
-      { id: 2, CO2: 400, date: '2024-04-10T11:00:00' },
-      { id: 3, CO2: 380, date: '2024-04-10T12:00:00' },
-    ];
+  getList = async () => {
+    try {
+      const dataSensorList = await getDataSensorAll();
+      this.setState({ dataSensorList });
+    } catch (error) {
+      console.error("Error fetching sensor data:", error);
+    }
   };
 
   render() {
     const { dataSensorList } = this.state;
 
     return (
-      <div style={{ width: '100%', padding: '16px', textAlign: 'center' }}>
-        <Typography variant="h5" gutterBottom>
-          Datos del Sensor:
+      <div style={{ width: '100%', padding: '16px', textAlign: 'center', height: '150px'}}>
+        <Typography variant="h5" gutterBottom style={{color: '#154360', textAlign: 'center', marginBottom: '15px', height: 'auto', fontSize: '40px', fontWeight: 'bold'}}>
+          DATOS SENSOR
         </Typography>
         {dataSensorList.map((data, index) => (
           <div key={index}>

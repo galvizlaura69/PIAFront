@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Typography, Paper, Grid } from '@mui/material';
+import { Margin } from '@mui/icons-material';
 
 class NoticesSidebar extends Component {
   constructor(props) {
@@ -9,12 +10,15 @@ class NoticesSidebar extends Component {
         paper: {
           padding: '8px',
           textAlign: 'center',
-          color: '#333',
+          color: 'black',
           height: '100%',
+          fontWeight: 'bold',
         },
         image: {
-          maxWidth: '100%',
-          maxHeight: '50px',
+          maxWidth: '150%',
+          maxHeight: '150px',
+          marginTop: '15px',
+          marginBottom: '15px',
         },
         gridItem: {
           width: '100%',
@@ -28,15 +32,17 @@ class NoticesSidebar extends Component {
     const { styles } = this.state;
 
     return (
-      <Grid item xs={12} sm={6} md={3} style={styles.gridItem}>
+      <Grid container spacing={5}>
         {noticias.map((categoria, index) => (
-          <Paper key={index} style={styles.paper}>
-            <Typography variant="h6" gutterBottom>
-              {categoria.titulo}
-            </Typography>
-            <img src={categoria.imagen} alt={categoria.titulo} style={styles.image} />
-            <Typography>{categoria.contenido}</Typography>
-          </Paper>
+          <Grid item xs={12} md={6} key={index}>
+            <Paper style={styles.paper}>
+              <Typography variant="h6" gutterBottom style={{fontWeight: 'bold'}}>
+                {categoria.titulo}
+              </Typography>
+              <img src={categoria.imagen} alt={categoria.titulo} style={styles.image} />
+              <Typography>{categoria.contenido}</Typography>
+            </Paper>
+          </Grid>
         ))}
       </Grid>
     );

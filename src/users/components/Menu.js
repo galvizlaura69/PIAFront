@@ -23,7 +23,7 @@ const Menu = ({ setUsuario }) => {
     };
 
     return (
-        <Box sx={{ display:"flex", justifyContent: "space-between", alignItems: "center", padding: 1 }}>
+        <Box sx={{ display:"flex", justifyContent: "space-between", alignItems: "center", padding: '20px 10px', background: '#F2F4F4', }}>
             <Box sx={{ display: "flex", gap: 2 }}>
                 <Button
                     variant="contained"

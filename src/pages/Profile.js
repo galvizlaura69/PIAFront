@@ -32,8 +32,8 @@ class Profile extends Component {
       });
     } catch (e) {
       swal({
-        title: "fallo",
-        text: "no se pudo actualizar, intenta de nuevo",
+        title: "Fallo",
+        text: "No es posible actualizar, intenta de nuevo",
         icon: "error",
       });
     }
@@ -45,7 +45,7 @@ class Profile extends Component {
       const response = await deleteUser(user._id);
       swal({
         title: "Genial",
-        text: "usuario eliminado exitosamente",
+        text: "Usuario eliminado exitosamente",
         icon: "success",
       });
       setTimeout(() => {
@@ -54,8 +54,8 @@ class Profile extends Component {
       }, 2000);
     } catch (e) {
       swal({
-        title: "fallo",
-        text: "no se pudo eliminar, intenta de nuevo",
+        title: "Fallo",
+        text: "No es posible eliminar, intenta de nuevo",
         icon: "error",
       });
     }
@@ -67,11 +67,14 @@ class Profile extends Component {
     return (
       <>
         <Box m={2} p={2}>
-          <form>
-            <Typography style={{ fontWeight: "bold", fontSize: "16" }}>
+
+          <form style={{ padding: "50px 50px", marginLeft: "200px", marginRight: "300px", marginTop: "40px", backgroundColor: "#F2F4F4"}} >
+
+            <Typography style={{ fontWeight: "bold", fontSize: "20px", marginBottom: "30px"}}>
               MIS DATOS
             </Typography>
-            <Box mb={2}>
+
+            <Box mb={3}>
               <TextField
                 label="Nombre"
                 variant="outlined"
@@ -82,7 +85,8 @@ class Profile extends Component {
                 }}
               />
             </Box>
-            <Box mb={2}>
+
+            <Box mb={3}>
               <TextField
                 label="Correo"
                 variant="outlined"
@@ -91,7 +95,8 @@ class Profile extends Component {
                 disabled
               />
             </Box>
-            <Box mb={2}>
+
+            <Box mb={3}>
               <TextField
                 label="Contraseña"
                 variant="outlined"
@@ -102,18 +107,33 @@ class Profile extends Component {
                 }}
               />
             </Box>
-            <Button variant="contained" onClick={this.updateCurrentUser}>
+
+            <Button variant="contained" onClick={this.updateCurrentUser} style={{ marginTop: "15px"}}>
               Actualizar
-            </Button>
+            </Button>  
+
           </form>
+
+          <img
+
+            src="https://img.freepik.com/vector-gratis/ilustracion-concepto-banca-linea_114360-21409.jpg?t=st=1712975210~exp=1712978810~hmac=e274be4fea8570a7de2033d1ed595e4490643dd286dfa8bf2f078948a0288ff6&w=1060"
+            alt="Font Date"
+            style={{ width: "500px", height: "400px", marginTop: "-900px", marginBottom: "40px", marginLeft: "600px"}}
+
+          /> 
+
         </Box>
-        <Box m={2} p={2}>
-          <Typography style={{ fontWeight: "bold", fontSize: "16" }}>
-            Si no desea continuar usando la aplicación, puede darse de baja
+
+        <Box m={2} p={2} style={{ padding: "50px 220px", backgroundColor: "with", marginTop: "-30px"}}>
+
+          <Typography style={{ fontWeight: "bold", fontSize: "20px" }}>
+            Si no desea continuar utilizando el aplicativo puede darse de baja
           </Typography>
-          <Button variant="contained" onClick={this.deleteCurrentUser}>
+
+          <Button variant="contained" onClick={this.deleteCurrentUser} style={{ marginTop: "20px"}}>
             DARME DE BAJA
           </Button>
+
         </Box>
       </>
     );
