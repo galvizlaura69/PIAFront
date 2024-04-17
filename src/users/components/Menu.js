@@ -23,33 +23,53 @@ const Menu = ({ setUsuario }) => {
     };
 
     return (
-        <Box sx={{ display:"flex", justifyContent: "space-between", alignItems: "center", padding: '20px 10px', background: '#F2F4F4', }}>
-            <Box sx={{ display: "flex", gap: 2 }}>
+        <Box
+            sx={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                zIndex: 1000,
+                width: '100%',
+                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', // Ajustamos la sombra
+            }}
+        >
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: '20px 10px',
+                    background: '#F2F4F4',
+                }}
+            >
+                <Box sx={{ display: "flex", gap: 2 }}>
+                    <Button
+                        variant="contained"
+                        startIcon={<AccountCircleIcon />}
+                        onClick={goProfile}
+                        sx={{ textTransform: 'none', minWidth: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
+                    >
+                        Mi Perfil
+                    </Button>
+                    <Button
+                        variant="contained"
+                        startIcon={<HomeIcon />}
+                        onClick={goHome}
+                        sx={{ textTransform: 'none', minWidth: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
+                    >
+                       Inicio
+                    </Button>
+                </Box>
                 <Button
-                    variant="contained"
-                    startIcon={<AccountCircleIcon />}
-                    onClick={goProfile}
-                    sx={{ textTransform: 'none', minWidth: '120px', justifyContent: 'center' }}
+                    variant="outlined"
+                    startIcon={<ExitToAppIcon />}
+                    onClick={cerrarSesion}
+                    sx={{ textTransform: 'none', minWidth: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
                 >
-                    Mi Perfil
-                </Button>
-                <Button
-                    variant="contained"
-                    startIcon={<HomeIcon />}
-                    onClick={goHome}
-                    sx={{ textTransform: 'none', minWidth: '120px', justifyContent: 'center' }}
-                >
-                   Inicio
+                    Cerrar Sesión
                 </Button>
             </Box>
-            <Button
-                variant="outlined"
-                startIcon={<ExitToAppIcon />}
-                onClick={cerrarSesion}
-                sx={{ textTransform: 'none', minWidth: '120px', justifyContent: 'center' }}
-            >
-                Cerrar Sesión
-            </Button>
         </Box>
     );
 }

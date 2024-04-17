@@ -14,9 +14,21 @@
 
 }
 
-body{
-    width: 98%;
+body {
+    width: 100%;
     position: relative;
     margin: auto;
-  overflow-x: hidden;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+html{
+    overflow-y: hidden;
+}
+
+.main-container{
+ height: 75vh;
+ margin-top: 170px;
+ overflow-y: auto;
 }

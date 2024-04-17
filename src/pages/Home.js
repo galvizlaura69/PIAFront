@@ -8,11 +8,8 @@ class Home extends Component {
     super(props);
   }
 
-
-
   render() {
     const { user } = this.props;
-
     const noticias = [
       {
         titulo: 'Tecnología',
@@ -37,11 +34,11 @@ class Home extends Component {
     ];
 
     return (
-      <div style={{ width: '100%'}}>
-        <div style={{ background: 'white' }}> 
+      <div style={{ width: '90%', margin:'auto'}}>
+        <div style={{ background: 'white', paddingBottom: '40px' }}> 
           <SensorData />
         </div>
-        <div style={{ background:"#F2F4F4", padding: '50px 50px', height: '800px'}}>
+        <div style={{ background:"#F2F4F4", padding: '50px 50px', minHeight: '800px', marginBottom: '80px'}}>
           <Typography variant="h4" gutterBottom style={{color: '#17202A', textAlign: 'center', marginBottom: '50px', height: 'auto', fontSize: '40px', fontWeight: 'bold'}}>
             Noticias Destacadas Para Ti <span style={{color: '#154360'}}>{user.name.toUpperCase()}</span>
           </Typography>

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Menu from '../users/components/Menu';
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
+import Footer from "../users/components/Footer";
 
 class Routes extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class Routes extends Component {
           <Box>
             <Menu setUsuario={this.state.setUsuario} />
           </Box>
-          <Box>
+          <Box sx={{ margin: '0 auto', marginTop: '80px'}}
+            className="main-container">
             <Switch>
               <Route path="/" exact>
                 <Home user={this.state.user} />
@@ -31,6 +33,9 @@ class Routes extends Component {
                 <Profile user={this.state.user} setUsuario={this.state.setUsuario} />
               </Route>
             </Switch>
+          </Box>
+          <Box>
+            <Footer />
           </Box>
         </Router>
       </div>
