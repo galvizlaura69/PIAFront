@@ -18,10 +18,10 @@ class SensorData extends Component {
     try {
       let dataSensorList = await getDataSensorAll();
 
-      // Agregar datos simulados para niveles contaminados y peligrosos
+/*       // Agregar datos simulados para niveles contaminados y peligrosos
       const contaminatedData = { co2Level: 600 }; // Contaminado
       const dangerousData = { co2Level: 1100 }; // Peligroso
-      dataSensorList = [contaminatedData, dangerousData, ...dataSensorList];
+      dataSensorList = [contaminatedData, dangerousData, ...dataSensorList]; */
 
       this.setState({ dataSensorList });
     } catch (error) {
