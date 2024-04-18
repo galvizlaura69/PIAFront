@@ -68,7 +68,7 @@ class Profile extends Component {
       <>
         <Box m={2} p={2}>
 
-          <form style={{ padding: "50px 50px", marginLeft: "200px", marginRight: "300px", marginTop: "40px", backgroundColor: "#F2F4F4"}} >
+          <form style={{ justifyContent: "center", alignItems: "center", padding: "50px 50px", marginRight: "130px", marginTop: '40px', marginLeft: '150px', backgroundColor: "#F2F4F4"}} >
 
             <Typography style={{ fontWeight: "bold", fontSize: "20px", marginBottom: "30px"}}>
               MIS DATOS
@@ -118,13 +118,13 @@ class Profile extends Component {
 
             src="https://img.freepik.com/vector-gratis/ilustracion-concepto-banca-linea_114360-21409.jpg?t=st=1712975210~exp=1712978810~hmac=e274be4fea8570a7de2033d1ed595e4490643dd286dfa8bf2f078948a0288ff6&w=1060"
             alt="Font Date"
-            style={{ width: "500px", height: "400px", marginTop: "-900px", marginBottom: "40px", marginLeft: "600px"}}
+            style={{ width: "500px", height: "400px", marginTop: "-900px", marginBottom: "40px", marginLeft: "750px" }}
 
           /> 
 
         </Box>
 
-        <Box m={2} p={2} style={{ padding: "50px 220px", backgroundColor: "with", marginTop: "-30px"}}>
+        <Box m={2} p={2} style={{ padding: "50px 200px", backgroundColor: "with", marginTop: "-30px"}}>
 
           <Typography style={{ fontWeight: "bold", fontSize: "20px" }}>
             Si no desea continuar utilizando el aplicativo puede darse de baja

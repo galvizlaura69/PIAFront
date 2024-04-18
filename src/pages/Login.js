@@ -133,9 +133,13 @@ class Login extends Component {
               </form>
             </div>
           ) : (
+            
             <div>
+
               <h1 style={{textAlign: 'left', marginLeft: '100px', marginBottom: '-50px'}}>Iniciar Sesión</h1>
+
               <form style={{marginTop: '100px', marginLeft: '100px'}}>
+
                 <Box mb={3}>
                   <TextField
                     label="Correo"
@@ -144,6 +148,7 @@ class Login extends Component {
                     onChange={(e) => this.setState({ email: e.target.value })}
                   />
                 </Box>
+
                 <Box mb={3}>
                   <TextField
                     label="Contraseña"
@@ -155,18 +160,23 @@ class Login extends Component {
                     onKeyDown={this.handleKeyDown}
                   />
                 </Box>
+
                 <Button variant="contained" onClick={() => this.loginUser()} style={{marginBottom: '20px'}}>
                   Iniciar sesión
                 </Button><br />
+
                 <Button onClick={() => this.setState({ isRegistrando: true })} style={{marginLeft: '-09px'}}>
                   No tengo cuenta, quiero registrarme.
                 </Button>
+
               </form>
+
               <img
                   src="https://img.freepik.com/vector-gratis/ilustracion-concepto-banca-linea_114360-21409.jpg?t=st=1712975210~exp=1712978810~hmac=e274be4fea8570a7de2033d1ed595e4490643dd286dfa8bf2f078948a0288ff6&w=1060"
                   alt="Font Date"
                   style={{ width: "500px", height: "400px", marginTop: "-350px", marginBottom: "40px", marginLeft: "600px"}}
               /> 
+
             </div>
           )}
         </div>
