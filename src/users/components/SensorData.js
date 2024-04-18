@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Typography, FormControl, Select, MenuItem } from '@mui/material';
 import getDataSensorAll from '../hooks/getDataSensorAll';
 
 class SensorData extends Component {
