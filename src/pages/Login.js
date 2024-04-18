@@ -17,6 +17,8 @@ const isValidEmail = (email) => {
   return emailRegex.test(email);
 };
 
+
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +26,8 @@ class Login extends Component {
       isRegistrando: false,
       name: "",
       email: "",
-      emailValid: true, // Estado para la validez del correo electrónico
+      emailValid: true, 
+      passwordValid: true,
       password: "",
       users: [],
       showPassword: false,
@@ -40,12 +43,27 @@ class Login extends Component {
     this.setState({ users: usersList });
   };
 
+  
+isValidPassword = (password) => {
+  const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.*\W).{8,}$/;
+  return passwordRegex.test(password);
+};
+
   createNewUser = async () => {
     const { name, email, password } = this.state;
     if (!isValidEmail(email)) {
       swal({
         title: "Correo Inválido",
         text: "Por favor, introduce un correo electrónico válido.",
+        icon: "error",
+      });
+      return;
+    }
+    if (!this.isValidPassword(password)) {
+      swal({
+        title: "Contraseña Inválida",
+        text:
+          "La contraseña debe tener al menos una mayúscula, una minúscula, un carácter especial y ser de al menos 8 caracteres.",
         icon: "error",
       });
       return;
@@ -66,9 +84,9 @@ class Login extends Component {
         title: "Oops",
         text: "Fallo al registrarse, intenta de nuevo",
         icon: "error",
-      });
-    }
-  };
+      });
+    }
+  };
 
   loginUser = () => {
     const { users, email, password } = this.state;
@@ -112,7 +130,7 @@ class Login extends Component {
   };
 
   render() {
-    const { isRegistrando, email, emailValid, password } = this.state;
+    const { isRegistrando, email, emailValid, password, passwordValid } = this.state;
     return (
       <Box
         display="flex"
@@ -165,8 +183,10 @@ class Login extends Component {
                     type={this.state.showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) =>
-                      this.setState({ password: e.target.value })
+                      this.setState({ password: e.target.value, passwordValid: this.isValidPassword(e.target.value) })
                     }
+                    error={!passwordValid}
+                    helperText={!passwordValid ? "La contraseña no es valida" : ""}
                     onKeyDown={this.handleKeyDown}
                     InputProps={{
                       endAdornment: (
