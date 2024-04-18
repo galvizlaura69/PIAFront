@@ -42,16 +42,22 @@ class Profile extends Component {
   deleteCurrentUser = async () => {
     const { user, setUsuario } = this.props;
     try {
-      const response = await deleteUser(user._id);
-      swal({
-        title: "Genial",
-        text: "Usuario eliminado exitosamente",
-        icon: "success",
-      });
-      setTimeout(() => {
-        setUsuario(null);
-        localStorage.setItem('user', null);
-      }, 2000);
+      const confirmDelete = window.confirm("¿Está seguro de que desea darse de baja? Esta acción no se puede deshacer.");
+  
+      if (confirmDelete) {
+        const response = await deleteUser(user._id);
+        swal({
+          title: "Genial",
+          text: "Usuario eliminado exitosamente",
+          icon: "success",
+        });
+        setTimeout(() => {
+          setUsuario(null);
+          localStorage.setItem('user', null);
+        }, 2000);
+      } else {
+        swal("Cancelado", "La acción de eliminación ha sido cancelada.", "info");
+      }
     } catch (e) {
       swal({
         title: "Fallo",
@@ -60,6 +66,8 @@ class Profile extends Component {
       });
     }
   };
+  
+  
 
   render() {
     const { name, email, password } = this.state;
