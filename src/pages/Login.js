@@ -8,8 +8,14 @@ import swal from "sweetalert";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'; // Nuevo icono de avatar
-import EmailIcon from '@mui/icons-material/Email'; // Nuevo icono de correo electrónico
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import EmailIcon from '@mui/icons-material/Email';
+
+// Función para validar el correo electrónico
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
 class Login extends Component {
   constructor(props) {
@@ -18,9 +24,10 @@ class Login extends Component {
       isRegistrando: false,
       name: "",
       email: "",
+      emailValid: true, // Estado para la validez del correo electrónico
       password: "",
       users: [],
-      showPassword: false, // Nuevo estado para controlar visibilidad de contraseña
+      showPassword: false,
     };
   }
 
@@ -35,6 +42,14 @@ class Login extends Component {
 
   createNewUser = async () => {
     const { name, email, password } = this.state;
+    if (!isValidEmail(email)) {
+      swal({
+        title: "Correo Inválido",
+        text: "Por favor, introduce un correo electrónico válido.",
+        icon: "error",
+      });
+      return;
+    }
     try {
       const response = await createUser({ name, email, password });
       console.log(response);
@@ -97,7 +112,7 @@ class Login extends Component {
   };
 
   render() {
-    const { isRegistrando, email, password } = this.state;
+    const { isRegistrando, email, emailValid, password } = this.state;
     return (
       <Box
         display="flex"
@@ -128,7 +143,13 @@ class Login extends Component {
                   <TextField
                     label="Correo"
                     type="email"
-                    onChange={(e) => this.setState({ email: e.target.value })}
+                    value={email}
+                    error={!emailValid}
+                    helperText={!emailValid ? "Correo inválido" : ""}
+                    onChange={(e) => {
+                      const newEmail = e.target.value;
+                      this.setState({ email: newEmail, emailValid: isValidEmail(newEmail) });
+                    }}
                     InputProps={{
                       endAdornment: (
                         <IconButton disabled>
@@ -176,7 +197,12 @@ class Login extends Component {
                     label="Correo"
                     value={email}
                     type="email"
-                    onChange={(e) => this.setState({ email: e.target.value })}
+                    error={!emailValid}
+                    helperText={!emailValid ? "Correo inválido" : ""}
+                    onChange={(e) => {
+                      const newEmail = e.target.value;
+                      this.setState({ email: newEmail, emailValid: isValidEmail(newEmail) });
+                    }}
                     InputProps={{
                       endAdornment: (
                         <IconButton disabled>
