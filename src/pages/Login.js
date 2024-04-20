@@ -44,21 +44,10 @@ class Login extends Component {
   };
 
   
-isValidPassword = (password) => {
-  const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.*\W).{8,}$/;
-  return passwordRegex.test(password);
-};
+
 
   createNewUser = async () => {
     const { name, email, password } = this.state;
-    if (!isValidEmail(email)) {
-      swal({
-        title: "Correo Inválido",
-        text: "Por favor, introduce un correo electrónico válido.",
-        icon: "error",
-      });
-      return;
-    }
     if (!this.isValidPassword(password)) {
       swal({
         title: "Contraseña Inválida",
@@ -178,15 +167,13 @@ isValidPassword = (password) => {
                   />
                 </Box>
                 <Box mb={3}>
-                  <TextField
+                <TextField
                     label="Contraseña"
                     type={this.state.showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) =>
-                      this.setState({ password: e.target.value, passwordValid: this.isValidPassword(e.target.value) })
+                      this.setState({ password: e.target.value })
                     }
-                    error={!passwordValid}
-                    helperText={!passwordValid ? "La contraseña no es valida" : ""}
                     onKeyDown={this.handleKeyDown}
                     InputProps={{
                       endAdornment: (
