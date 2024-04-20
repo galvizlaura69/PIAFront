@@ -27,7 +27,6 @@ class Login extends Component {
       name: "",
       email: "",
       emailValid: true, 
-      passwordValid: true,
       password: "",
       users: [],
       showPassword: false,
@@ -118,7 +117,7 @@ class Login extends Component {
   };
 
   render() {
-    const { isRegistrando, email, emailValid, password, passwordValid } = this.state;
+    const { isRegistrando, email, emailValid, password} = this.state;
     return (
       <Box
         display="flex"
@@ -167,19 +166,17 @@ class Login extends Component {
                 </Box>
                 <Box mb={3}>
                 <TextField
-                    label="Correo"
-                    value={email}
-                    type="email"
-                    error={!emailValid}
-                    helperText={!emailValid ? "Correo inválido" : ""}
-                    onChange={(e) => {
-                      const newEmail = e.target.value;
-                      this.setState({ email: newEmail, emailValid: isValidEmail(newEmail) });
-                    }}
+                    label="Contraseña"
+                    type={this.state.showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) =>
+                      this.setState({ password: e.target.value })
+                    }
+                    onKeyDown={this.handleKeyDown}
                     InputProps={{
                       endAdornment: (
-                        <IconButton disabled>
-                          <EmailIcon />
+                        <IconButton onClick={this.togglePasswordVisibility} >
+                          {this.state.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                         </IconButton>
                       ),
                     }}
