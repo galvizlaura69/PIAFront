@@ -48,11 +48,10 @@ class Login extends Component {
 
   createNewUser = async () => {
     const { name, email, password } = this.state;
-    if (!this.isValidPassword(password)) {
+    if (!isValidEmail(email)) {
       swal({
-        title: "Contraseña Inválida",
-        text:
-          "La contraseña debe tener al menos una mayúscula, una minúscula, un carácter especial y ser de al menos 8 caracteres.",
+        title: "Correo Inválido",
+        text: "Por favor, introduce un correo electrónico válido.",
         icon: "error",
       });
       return;
@@ -168,17 +167,19 @@ class Login extends Component {
                 </Box>
                 <Box mb={3}>
                 <TextField
-                    label="Contraseña"
-                    type={this.state.showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) =>
-                      this.setState({ password: e.target.value })
-                    }
-                    onKeyDown={this.handleKeyDown}
+                    label="Correo"
+                    value={email}
+                    type="email"
+                    error={!emailValid}
+                    helperText={!emailValid ? "Correo inválido" : ""}
+                    onChange={(e) => {
+                      const newEmail = e.target.value;
+                      this.setState({ email: newEmail, emailValid: isValidEmail(newEmail) });
+                    }}
                     InputProps={{
                       endAdornment: (
-                        <IconButton onClick={this.togglePasswordVisibility} >
-                          {this.state.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                        <IconButton disabled>
+                          <EmailIcon />
                         </IconButton>
                       ),
                     }}
