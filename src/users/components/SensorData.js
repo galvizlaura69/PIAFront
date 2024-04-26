@@ -102,7 +102,7 @@ class SensorData extends Component {
             <Typography variant='subtitle2' style={{ color: '#154360', textAlign: 'center', height: 'auto', fontSize: '15px', fontWeight: 'bold' }}>
               ESCALA DE NIVELES
             </Typography>
-            <img src="/escala.jpg" alt="Escala" style={{ width: '100%', height: 'auto' }} />
+            <img src="https://firebasestorage.googleapis.com/v0/b/galviz-react-7a488.appspot.com/o/Escala.jpg?alt=media&token=2234dcf6-e8c4-49ec-9ccf-1ee9e5265b17" alt="Escala" style={{ width: '100%', height: 'auto' }} />
             <Typography variant="subtitle1" style={{ fontSize: '12px', fontWeight: 'bold' }}>
               <span style={{ color: 'green' }}> Nivel Bajo: Menor o igual a 400 PPM</span>
               <br></br>
