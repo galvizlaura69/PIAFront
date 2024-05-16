@@ -4,6 +4,8 @@ import { Button } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import BarChartIcon from '@mui/icons-material/BarChart';
+
 
 const Menu = ({ setUsuario }) => {
     const history = useHistory();
@@ -15,6 +17,10 @@ const Menu = ({ setUsuario }) => {
 
     const goProfile = () => {
         history.push('/profile');
+    };
+
+    const goGrafic = () => {
+        history.push('/grafics');
     };
 
     const goHome = () => {
@@ -70,6 +76,14 @@ const Menu = ({ setUsuario }) => {
                         sx={{ textTransform: 'none', Width: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
                     >
                         Mi Perfil
+                    </Button>
+                    <Button
+                        variant="contained"
+                        startIcon={<BarChartIcon  />}
+                        onClick={goGrafic}
+                        sx={{ textTransform: 'none', Width: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
+                    >
+                       Gráficas
                     </Button>
                     <Button
                         variant="outlined"

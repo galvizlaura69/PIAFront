@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Menu from '../users/components/Menu';
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
-import Footer from "../users/components/Footer";
+import Grafics from "../pages/Grafics";
 
 class Routes extends Component {
   constructor(props) {
@@ -31,6 +31,9 @@ class Routes extends Component {
               </Route>
               <Route path="/profile" exact>
                 <Profile user={this.state.user} setUsuario={this.state.setUsuario} />
+              </Route>
+              <Route path="/grafics" exact>
+                <Grafics user={this.state.user} setUsuario={this.state.setUsuario} />
               </Route>
             </Switch>
           </Box>
