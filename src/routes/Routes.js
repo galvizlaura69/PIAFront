@@ -34,9 +34,6 @@ class Routes extends Component {
               </Route>
             </Switch>
           </Box>
-          <Box>
-            <Footer />
-          </Box>
         </Router>
       </div>
     );

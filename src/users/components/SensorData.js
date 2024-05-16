@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Typography, FormControl, Select, MenuItem } from '@mui/material';
+import { Typography, FormControl, Select, MenuItem, Button } from '@mui/material';
 import getDataSensorAll from '../hooks/getDataSensorAll';
 
 class SensorData extends Component {
@@ -8,6 +8,9 @@ class SensorData extends Component {
     this.state = {
       dataSensorList: [],
       filterColor: 'all', // Default: Mostrar todos los colores
+      page: 1,
+      pageNumber: 5,
+      isNextButtonDisabled: false
     };
   }
 
@@ -15,15 +18,12 @@ class SensorData extends Component {
     this.getList();
   }
 
+
   getList = async () => {
     try {
-      let dataSensorList = await getDataSensorAll();
-      // Simulación de datos
-      // const contaminatedData = { co2Level: 600 }; // Contaminado
-      // const dangerousData = { co2Level: 1100 }; // Peligroso
-      // dataSensorList = [contaminatedData, dangerousData, ...dataSensorList];
-
-      this.setState({ dataSensorList });
+      const { page, pageNumber } = this.state;
+      let dataSensorList = await getDataSensorAll(page, pageNumber);
+      this.setState({ dataSensorList, isNextButtonDisabled: dataSensorList.length < 5 });
     } catch (error) {
       console.error("Error fetching sensor data:", error);
     }
@@ -43,6 +43,12 @@ class SensorData extends Component {
     this.setState({ filterColor: event.target.value });
   };
 
+  handlePageChange = (page) => {
+    this.setState({ page }, () => {
+      this.getList();
+    });
+  };
+
   formatDate = (dateString) => {
     const createdAt = new Date(dateString);
     const formattedDate = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`;
@@ -51,14 +57,12 @@ class SensorData extends Component {
   };
 
   render() {
-    const { dataSensorList, filterColor } = this.state;
+    const { dataSensorList, filterColor, page, isNextButtonDisabled } = this.state;
 
     // Filtrar datos según el color seleccionado
     const filteredData = filterColor === 'all'
       ? dataSensorList
       : dataSensorList.filter(data => this.getCO2Color(parseInt(data.co2Level)) === filterColor);
-
-
 
     return (
       <div style={{ width: '80%', margin: 'auto', padding: '16px' }}>
@@ -84,7 +88,7 @@ class SensorData extends Component {
               </Select>
             </FormControl>
             {filteredData.length > 0 ? (
-              filteredData.map((data, index) => (
+              filteredData?.map((data, index) => (
                 <div key={index} style={{ marginBottom: '2px', padding: '4px', borderRadius: '4px', textAlign: 'center' }}>
                   <Typography variant="subtitle1" style={{ color: this.getCO2Color(parseInt(data.co2Level)), border: "1px solid", fontSize: '16px', fontWeight: 'bold' }}>
                     CO2: {parseInt(data.co2Level).toFixed(0)} PPM / <span>{this.formatDate(data.createdAt)}</span>
@@ -96,6 +100,26 @@ class SensorData extends Component {
                 No hay registros de datos para este nivel.
               </Typography>
             )}
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+              <Button
+                variant="contained"
+                disabled={page === 1}
+                onClick={() => this.handlePageChange(page - 1)}
+                sx={{ textTransform: 'none', Width: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
+
+              >
+                Anterior
+              </Button>
+              <Button
+                variant="contained"
+                disabled={isNextButtonDisabled}
+                onClick={() => this.handlePageChange(page + 1)}
+                sx={{ textTransform: 'none', Width: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
+
+              >
+                Siguiente
+              </Button>
+            </div>
           </div>
 
           <div style={{ textAlign: 'center', width: '25%', margin: 'auto', marginTop: '20px', border: '1px solid #ccc', padding: '10px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
