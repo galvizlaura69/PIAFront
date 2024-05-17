@@ -14,17 +14,21 @@ const processData = (sensorData) => {
 };
 
 
+
+
 const LineChartFull = ({ sensorData }) => {
   const data = processData(sensorData);
 
+  console.log(data,"a")
+
   return (
-    <LineChart width={800} height={300} data={data}>
+    <LineChart width={500} height={300} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="hour" />
       <YAxis domain={[0, 800]} ticks={[0, 100, 200, 300, 400, 500, 600, 700, 800]} />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="value" stroke="#8884d8" />
+      <Line type="monotone" dataKey="value" stroke="blue" />
     </LineChart>
   );
 };

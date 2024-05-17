@@ -34,7 +34,7 @@ class Home extends Component {
     ];
 
     return (
-      <div style={{ width: '90%', margin:'auto'}}>
+      <div style={{ width: '90%', margin:'auto', marginTop:'50px' }}>
         <div style={{ background: 'white', paddingBottom: '40px' }}> 
           <SensorData />
         </div>

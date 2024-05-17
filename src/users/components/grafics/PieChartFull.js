@@ -17,7 +17,7 @@ const PieChartFull = ({ sensorData }) => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']; // Colores para las secciones de la torta
 
   return (
-    <PieChart width={800} height={300}>
+    <PieChart width={500} height={300}>
       <Pie
         data={data}
         dataKey="value"

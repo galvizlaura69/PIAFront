@@ -4,6 +4,7 @@ import getDataSensorFull from "../users/hooks/getDataSensorFull";
 import { Box, Button, Input, Typography } from "@mui/material";
 import BarChartFull from "../users/components/grafics/BarChartFull";
 import PieChartFull from "../users/components/grafics/PieChartFull";
+import ScatterChartFull from "../users/components/grafics/ScatterChartFull";
 
 class Grafics extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Grafics extends Component {
 
     this.state = {
       sensorData: [],
-      date: `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`
+      date: `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`
     };
   }
 
@@ -44,14 +45,14 @@ class Grafics extends Component {
     const { sensorData } = this.state;
 
     return (
-      <div style={{ width: '80%', margin: 'auto', padding: '16px' }}>
+      <div style={{ width: '80%', margin: 'auto', padding: '16px', marginTop:'50px' }}>
         <Typography variant="h5" gutterBottom style={{ color: '#154360', textAlign: 'center', marginBottom: '25px', height: 'auto', fontSize: '40px', fontWeight: 'bold' }}>
-        Gráficas
+          Gráficas
         </Typography>
-        <Typography  style={{ marginBottom: '30px', color: '#154360', fontWeight: 'bold' }}>
+        <Typography style={{ marginBottom: '10px', color: '#154360', fontWeight: 'bold', textAlign: 'center' }}>
           Seleccione la fecha a consultar
         </Typography>
-        <Box style={{marginBottom:'20px'}}>
+        <Typography style={{ marginBottom: '40px', color: '#154360', fontWeight: 'bold', textAlign: 'center' }}>
           <Input type="date" value={this.state.date} onChange={this.handleDateChange} />
           <Button
             variant="contained"
@@ -60,15 +61,36 @@ class Grafics extends Component {
           >
             Obtener Datos
           </Button>
+        </Typography>
+        <Box style={{width:'100%', display:'flex', marginBottom:'40px'}}>
+          <div style={{ width: '50%' }}>
+            <Typography variant="h6" gutterBottom style={{ color: '#154360', textAlign: 'center', marginBottom: '25px', height: 'auto', fontSize: '24px', fontWeight: 'bold' }}>
+              Gráfica de Línea
+            </Typography>
+            <LineChartFull sensorData={sensorData} />
+          </div>
+          <div style={{ width: '50%' }}>
+            <Typography variant="h6" gutterBottom style={{ color: '#154360', textAlign: 'center', marginBottom: '25px', height: 'auto', fontSize: '24px', fontWeight: 'bold' }}>
+              Gráfica de Barras
+            </Typography>
+            <BarChartFull sensorData={sensorData} />
+          </div>
         </Box>
-        <LineChartFull sensorData={sensorData} />
-        <br>
-        </br> 
-        <PieChartFull sensorData={sensorData} />
-        <br>
-        </br>       
-        <BarChartFull sensorData={sensorData} />
+        <Box style={{width:'100%', display:'flex'}}>
+        <div style={{ width: '50%' }}>
+          <Typography variant="h6" gutterBottom style={{ color: '#154360', textAlign: 'center', marginBottom: '25px', height: 'auto', fontSize: '24px', fontWeight: 'bold' }}>
+            Gráfica de Torta
+          </Typography>
+          <PieChartFull sensorData={sensorData} />
         </div>
+        <div style={{ width: '50%' }}>
+          <Typography variant="h6" gutterBottom style={{ color: '#154360', textAlign: 'center', marginBottom: '25px', height: 'auto', fontSize: '24px', fontWeight: 'bold' }}>
+            Gráfica de Dispersión
+          </Typography>
+          <ScatterChartFull sensorData={sensorData} />
+        </div>
+        </Box>
+      </div>
     );
   }
 }

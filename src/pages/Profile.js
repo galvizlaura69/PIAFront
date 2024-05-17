@@ -74,7 +74,7 @@ class Profile extends Component {
 
     return (
       <>
-        <Box m={2} p={2}>
+        <Box m={2} p={2} style={{marginTop:'20px' }}>
 
           <form style={{ justifyContent: "center", alignItems: "center", padding: "50px 50px", marginRight: "130px", marginTop: '40px', marginLeft: '150px', backgroundColor: "#F2F4F4"}} >
 
