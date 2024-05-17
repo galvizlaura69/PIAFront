@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import LineChartFull from "../users/components/grafics/LineChartFull";
 import getDataSensorFull from "../users/hooks/getDataSensorFull";
 import { Box, Button, Input, Typography } from "@mui/material";
+import BarChartFull from "../users/components/grafics/BarChartFull";
+import PieChartFull from "../users/components/grafics/PieChartFull";
 
 class Grafics extends Component {
   constructor(props) {
@@ -60,7 +62,13 @@ class Grafics extends Component {
           </Button>
         </Box>
         <LineChartFull sensorData={sensorData} />
-      </div>
+        <br>
+        </br> 
+        <PieChartFull sensorData={sensorData} />
+        <br>
+        </br>       
+        <BarChartFull sensorData={sensorData} />
+        </div>
     );
   }
 }

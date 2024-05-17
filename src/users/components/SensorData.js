@@ -9,7 +9,7 @@ class SensorData extends Component {
       dataSensorList: [],
       filterColor: 'all', // Default: Mostrar todos los colores
       page: 1,
-      pageNumber: 5,
+      pageNumber: 6,
       isNextButtonDisabled: false
     };
   }
@@ -23,7 +23,7 @@ class SensorData extends Component {
     try {
       const { page, pageNumber } = this.state;
       let dataSensorList = await getDataSensorAll(page, pageNumber);
-      this.setState({ dataSensorList, isNextButtonDisabled: dataSensorList.length < 5 });
+      this.setState({ dataSensorList, isNextButtonDisabled: dataSensorList.length < 6 });
     } catch (error) {
       console.error("Error fetching sensor data:", error);
     }
