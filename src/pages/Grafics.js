@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LineChartFull from "../users/components/grafics/LineChartFull";
 import getDataSensorFull from "../users/hooks/getDataSensorFull";
+import { Box, Button, Input, Typography } from "@mui/material";
 
 class Grafics extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Grafics extends Component {
   }
 
   componentDidMount() {
-    this.getData(); 
+    this.getData();
   }
 
   getData = async () => {
@@ -41,10 +42,23 @@ class Grafics extends Component {
     const { sensorData } = this.state;
 
     return (
-      <div style={{ width: '90%', margin: 'auto', padding: '16px' }}>
-        <h1>Gráficas</h1>
-        <input type="date" value={this.state.date} onChange={this.handleDateChange} />
-        <button onClick={this.getData}>Obtener Datos</button>
+      <div style={{ width: '80%', margin: 'auto', padding: '16px' }}>
+        <Typography variant="h5" gutterBottom style={{ color: '#154360', textAlign: 'center', marginBottom: '25px', height: 'auto', fontSize: '40px', fontWeight: 'bold' }}>
+        Gráficas
+        </Typography>
+        <Typography  style={{ marginBottom: '30px', color: '#154360', fontWeight: 'bold' }}>
+          Seleccione la fecha a consultar
+        </Typography>
+        <Box style={{marginBottom:'20px'}}>
+          <Input type="date" value={this.state.date} onChange={this.handleDateChange} />
+          <Button
+            variant="contained"
+            onClick={this.getData}
+            sx={{ textTransform: 'none', Width: '120px', justifyContent: 'center', borderRadius: 20, margin: '0 5px' }}
+          >
+            Obtener Datos
+          </Button>
+        </Box>
         <LineChartFull sensorData={sensorData} />
       </div>
     );

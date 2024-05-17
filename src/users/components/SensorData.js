@@ -49,17 +49,9 @@ class SensorData extends Component {
     });
   };
 
-  formatDate = (dateString) => {
-    const createdAt = new Date(dateString);
-    const formattedDate = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`;
-    const formattedTime = `${createdAt.getHours()}:${createdAt.getMinutes()}:${createdAt.getSeconds()}`;
-    return `Fecha: ${formattedDate} / Hora: ${formattedTime}`;
-  };
-
   render() {
     const { dataSensorList, filterColor, page, isNextButtonDisabled } = this.state;
 
-    // Filtrar datos según el color seleccionado
     const filteredData = filterColor === 'all'
       ? dataSensorList
       : dataSensorList.filter(data => this.getCO2Color(parseInt(data.co2Level)) === filterColor);
@@ -91,7 +83,7 @@ class SensorData extends Component {
               filteredData?.map((data, index) => (
                 <div key={index} style={{ marginBottom: '2px', padding: '4px', borderRadius: '4px', textAlign: 'center' }}>
                   <Typography variant="subtitle1" style={{ color: this.getCO2Color(parseInt(data.co2Level)), border: "1px solid", fontSize: '16px', fontWeight: 'bold' }}>
-                    CO2: {parseInt(data.co2Level).toFixed(0)} PPM / <span>{this.formatDate(data.createdAt)}</span>
+                    CO2: {parseInt(data.co2Level).toFixed(0)} PPM / fecha {data.createdAt.slice(0, 10)} / hora: {data.createdAt.slice(11, 19)}
                   </Typography>
                 </div>
               ))
